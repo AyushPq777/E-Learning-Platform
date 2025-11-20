@@ -42,8 +42,8 @@ app.use(limiter);
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Database Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/elearning', {
+// Database Connection - ADD YOUR CONNECTION STRING HERE
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://Ayush-db:MyPassword@cluster0.8zuiw6u.mongodb.net/E-Learning?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
