@@ -26,9 +26,16 @@ const io = configureSocket(server);
 
 // Security Middleware
 app.use(helmet());
+
+// ✅ FIXED CORS CONFIGURATION
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
-    credentials: true
+    origin: [
+        'http://localhost:3000',
+        'https://e-learning-platform-client-q9v7.onrender.com'
+    ],
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
 // Rate Limiting
@@ -42,7 +49,7 @@ app.use(limiter);
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Database Connection - ADD YOUR CONNECTION STRING HERE
+// Database Connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://Ayush-db:MyPassword@cluster0.8zuiw6u.mongodb.net/E-Learning?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
